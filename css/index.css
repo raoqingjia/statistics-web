@@ -1,0 +1,261 @@
+body{ height: 100%; overflow: hidden;}
+/*.content { margin-bottom: 6rem; overflow: scroll;}*/
+.select_box {
+	width: 100%;
+	height: 4rem;
+	line-height: 4rem;
+}
+
+/*下拉框*/
+
+.select-area {
+	position: relative;
+	float: left;
+	width: calc(100% /3);
+	height: 4rem;
+	padding: 0 1rem;
+	text-align: center;
+	color: #0085d0;
+	box-sizing: border-box;
+	display:table-cell;
+	vertical-align:bottom;
+	overflow: hidden;
+}
+.select-area em { position: absolute; top: 1rem; right: 0; width: 1px; height: 2rem; background: #dfe7f2;}
+.select-area:nth-of-type(3n){ background: none;}
+.select-area .edit {
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
+	background: url(../img/edit.png) no-repeat;
+	background-size: contain;
+	/*vertical-align: middle;*/
+	margin-left: .4rem;
+}
+
+.select-area select {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+	width: 100%;
+}
+
+.content-box {
+	position: relative;
+	width: 100%;
+	/*margin-top: 9.5rem;
+	min-height: 10.5rem;*/
+	height: 22.3rem;
+	padding-top: 2rem;
+	box-sizing: border-box;
+	/*background: #e6e6e6;*/
+	/*overflow: visible;*/
+}
+.padding-1{
+	padding-top: 1rem;
+}
+
+.content-box.store { position: fixed; bottom: 0rem;}
+.content-box.pie {/* position: fixed; bottom: 0rem;*/ }
+.wrap {min-height: 1rem; max-height: 16rem; height: auto; margin-top: 7rem;}
+.pie .wrap { height: 13rem; margin-top: 11.2rem;}
+.store .wrap { height: 9.5rem;}
+
+.more{
+	position: absolute;
+	top: 14.7rem;
+	left: 38%;
+	font-size: 1.2rem;
+	color: #abc0de;
+}
+.content-list {
+	position: relative;
+	top: -6.5rem;
+	left: 1rem;
+	width: 100px;
+	width: calc(100% -  2rem);
+	/*margin: 0 auto;*/
+	background: #fff;
+	border-radius: .5rem;
+	overflow: scroll;
+	-moz-box-shadow:2px 2px 10px #e0e4eb;
+	-webkit-box-shadow:2px 2px 10px #e0e4eb;
+	box-shadow:2px 2px 10px #e0e4eb;
+}
+.list-title {
+	color: #0085d0;
+}
+.pie .content-list { top: -10.5rem;}
+.list-title span {
+	display: inline-block;
+	height: 100%;
+	box-sizing: border-box;
+	border-bottom: 2px solid #0085d0;
+}
+
+.content-list ul {
+	display: -webkit-flex;
+	/* Safari */
+	-webkit-flex-wrap: wrap;
+	/* Safari 6.1+ */
+	display: flex;
+	width: 100%;
+	padding: 0 10%;
+	height: 3rem;
+	line-height: 3rem;
+	box-sizing: border-box;
+}
+
+.content-list ul li {
+	position: relative;
+	/*width: 25%;*/
+	height: 3rem;
+	text-align: center;
+	/*color: #fff;*/
+	font-size: 1.1rem;
+	border-bottom: 1px solid #f0f0f0;
+	box-sizing: border-box;
+	/*overflow: hidden;*/
+}
+.content-list ul li:nth-of-type(1),.content-list ul li:nth-of-type(2){ width: 32%;}
+.content-list ul li:nth-of-type(3),.content-list ul li:nth-of-type(4){ width: 18%;}
+.content-list ul.list-title li { border-bottom: 0;}
+/*.list:nth-of-type(2n+1) {
+	background: #f3f3f3;
+}*/
+.list li:first-of-type {
+	/*padding-left: -3%;*/
+	text-align: left;
+	box-sizing: border-box;
+}
+/*ul.list { background: red;}*/
+.list:nth-of-type(n) li i {
+	position: absolute;
+	left: -10px;
+	top: 50%;
+	display: inline-block;
+	width: 2px;
+	height: 1.2rem;
+	vertical-align: middle;
+	margin-right: 3px;
+	transform: translateY(-50%);
+}
+.list.hover { background: #f3f3f3; }
+.list:nth-of-type(2) li:first-of-type i { background: #eb63f7; }
+
+.list:nth-of-type(3) li:first-of-type i {
+	background: #1a90ff;
+}
+
+.list:nth-of-type(4) li:first-of-type i {
+	background: #00bcf0;
+}
+
+.list:nth-of-type(5) li:first-of-type i {
+	background: #57d9a0;
+}
+
+.list:nth-of-type(6) li:first-of-type i {
+	background: #e2e573;
+}
+.list li em {
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	vertical-align: middle;
+	margin-left: 5px;
+	overflow: hidden;
+}
+.list:nth-last-of-type(1) li { border-bottom: 0;}
+.list li em img { width: 100%;}
+
+.list-content { width: 90%; padding: 0 5%; background: #f6f7f7; overflow: hidden; color: #989fa9; display: none;}
+.content-list .list-content ul { height: auto;}
+.content-list .list-content li { width: 100% !important; line-height: 3rem; overflow: hidden; text-align: left; color: #989fa9;}
+.content-list .list-content li span { padding-left: 4rem;}
+.list-content a { color: #989fa9;}
+
+@keyframes animate{
+	form {
+		transform:rotate(0deg); 
+	}
+	to {
+		transform:rotate(180deg); 
+	}
+	
+}
+
+@-webkit-keyframes animate {
+	form {
+		-webkit-transform:rotate(0deg); 
+	}
+	to {
+		-webkit-transform:rotate(180deg); 
+	}
+	
+}
+.store .list:nth-of-type(2) li:first-of-type i { background: #0085d0; }
+.store .list:nth-of-type(3) li:first-of-type i { background: #6cd9aa; }
+.store .list:nth-of-type(4) li:first-of-type i { background: #00bcf0; }
+.store .list:nth-of-type(5) li:first-of-type i { background: #e2e681; }
+
+/*柱形图统计模版*/
+.statistics-box { 
+	
+	display: -webkit-flex; /* Safari */
+  	display: flex;
+  	width: calc(100% - 2rem);
+  	height: 8.5rem;
+  	border-radius: 5px;
+  	background: #fff;
+  	margin: 0 1rem;
+  	/*flex-direction: row;*/
+  	padding: 2.2rem 9%;
+  	box-sizing: border-box;
+  	flex-flow: row nowrap;
+	-moz-box-shadow:2px 2px 10px #e0e4eb;
+	-webkit-box-shadow:2px 2px 10px #e0e4eb;
+	box-shadow:2px 2px 10px #e0e4eb;
+}
+.statistics{
+	flex-grow: 1;
+	padding-left: 4.4%;
+	box-sizing: border-box;
+	color:#0085d0;
+}
+.statistics strong { font-size: 2.0rem;font-weight: normal;}
+.statistics span { display: block; height: 1.5rem; line-height: 1rem; color: #abc0de; }
+.statistics p { display: block; height: 2.6rem; line-height:3.5rem;box-sizing: border-box;  vertical-align: bottom;  overflow: hidden;}
+.stat-list { padding-left: 1rem}
+.statistics:nth-of-type(1) .stat-list{
+	border-left: 5px solid #1671eb;
+}
+.statistics:nth-of-type(2) .stat-list {
+	border-left: 5px solid #e837f8;
+}
+#main {width: 100%;top:-1.3rem; margin:0 auto;height:240px;/*margin-bottom: 6rem;*/}
+
+@media screen and ( min-width: 319px){
+	/*320px显示屏样式 苹果4/4S/5C/5S黑莓Z30 */
+	#main {width: 100%; margin:0 auto;}
+}
+/*6*/
+@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
+	#main {width: 100%;margin:0 auto;}
+}
+/*6+*/
+@media (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3){
+	#main {width: 100%; margin:0 auto; padding-bottom: 2rem}
+}
+
+#mains {width: 100%;height:16rem; /*margin-bottom: 6rem;*/ margin-top: 1.5rem; padding-top: 0rem; box-sizing: border-box;}
+.swiper-wrapper { height: calc(100% - 44px - 9rem); }
+.swiper-slide-active { overflow-y: scroll}
+.fiexdBox { height: 6rem;}
+
+.isclick { margin-bottom: 8.3rem; padding-top: 2rem;}
+.iswrap {height:14.5rem !important; margin-top: 9rem !important;}
+.mobileSelect {
+	z-index: 10000000;
+}

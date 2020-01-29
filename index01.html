@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>疫情专项数据统计分析</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/earthEchars.css"/>
+    <style>
+
+        .banner {
+            width: 100%;
+            height: 15rem;
+            background-image: url("img/banner.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .title-wrap h1 {
+            font-size: 16px;
+            line-height: 40px;
+            padding: 10px 0 0 0;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .title-wrap p {
+            line-height: 34px;
+            font-size: 14px;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        .title-content {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 2rem 0;
+        }
+
+        .title-content dl {
+            float: left;
+            width: 50%;
+            padding: 0 1rem;
+            box-sizing: border-box;
+        }
+
+        .title-content dt {
+            font-size: 14px;
+            line-height: 34px;
+        }
+
+        .title-content dd {
+            font-size: 12px;
+            line-height: 30px;
+        }
+
+        .title-content dd span {
+            float: right;
+            color: #1660f6;
+        }
+
+        .title-content .phone {
+            margin: 0.5rem 0;
+            font-size: 14px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="banner"></div>
+<div class="title-wrap clearflx">
+    <h1>疫情专项数据统计分析</h1>
+    <p>1月28日0时至1月29日24时数据一览</p>
+    <div class="title-content clearflx">
+        <div class="clearflx">
+            <dl>
+                <dt>云视讯数据统计</dt>
+                <dd>新增订购数<span>220个</span></dd>
+                <dd>新增成员数<span>19923个</span></dd>
+                <dd>支撑医院数<span>32个</span></dd>
+                <dd>支撑政府部门数<span>186个</span></dd>
+            </dl>
+            <dl>
+                <dt>视频彩铃统计</dt>
+                <dd>新增订购数<span>160个</span></dd>
+                <dd>新增成员数<span>49300个</span></dd>
+                <dd>支撑医院数<span>15个</span></dd>
+                <dd>支撑政府部门数<span>145个</span></dd>
+            </dl>
+        </div>
+        <p class="phone">值班电话：158 1051 1759 、182 0165 0691</p>
+    </div>
+
+</div>
+
+<div id="yunShiXunBarAndLine" style="width: 100%;height:30rem;"></div>
+<div style="margin: -2rem 0 0 0;">
+    <div id="caiLingBarAndLine" style="width: 100%;height:30rem;"></div>
+</div>
+
+
+
+<div id="china" style="width: 100%;height: 350px;display: none;"></div>
+<div id="bar" style="width: 100%;height: 350px;display: none;"></div>
+</body>
+<script src="js/lib/jquery-3.2.1.min.js"></script>
+<script src="js/lib/echarts.min.js"></script>
+<script src="js/lib/china.js"></script>
+<script src="js/lib/vintage.js"></script>
+<script>
+    var yunShiXunProvince = ['河南','四川','江苏','山东','宁夏','内蒙古','新疆','重庆','陕西','北京','山西','安徽','福建' ];
+    var yunShiXunOrderData=[131,48,12,9,5,4,3,2, 2,1,1,1,1];
+    var yunShiXunMemberData=[13550,4792,181,164,533,426,5,5,6,78,0,1,245];
+    console.log(yunShiXunProvince.length);
+    console.log(yunShiXunOrderData.length);
+    console.log(yunShiXunMemberData.length);
+    console.log("-------------");
+    yunShiXunBarAndLineChar('yunShiXunBarAndLine',yunShiXunProvince,yunShiXunOrderData,yunShiXunMemberData,0,200,0,20000);
+    function yunShiXunBarAndLineChar(charId,province,dataBar,dataLine,barMin,barMax,lineMin,lineMax){
+        var optionBarAndLine = {
+            backgroundColor: '#FFFFFF',
+            color: ['#3398DB', '#f77003'],
+            title: {
+                text: '云视讯数据统计',
+                left: '10px',
+                textStyle: {
+                    color: '#333',
+                    fontStyle: 'normal',
+                    fontWeight: 'normal',
+                    fontSize: 14
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                // axisPointer: {
+                // 	type: 'cross',
+                // 	crossStyle: {
+                // 		color: '#999'
+                // 	}
+                // }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {show: false, readOnly: false},
+                    magicType: {show: false, type: ['line', 'bar']},
+                    restore: {show: false},
+                    saveAsImage: {show: false}
+                }
+            },
+            grid: {
+                left: '4%',
+                right: '4%',
+                top: '5%',
+                bottom: '21%',
+            },
+            legend: {
+                data: ['订购数', '成员数'],
+                right: '20px',
+                top: '0%',
+            },
+            dataZoom: [
+                {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 40,
+                    // maxSpan: 20,
+                    zoomLock: true,  //  只能平移不能缩放
+                    textStyle: {
+                        lineHeight: 20,
+                        fontSize: 12
+                    },
+                    bottom: '0',
+                }, {
+                    type: 'inside',
+                    zoomOnMouseWheel:false,
+                    moveOnMouseMove:false,
+                    realtime: true,
+                    start: 0,
+                    end: 20,
+
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    data: province,
+                    axisLabel:{
+                        show: true,
+                        interval:0,
+                        rotate:0,
+                        textStyle: {
+                            color: '#333'
+                        }
+                    },
+                    axisPointer: {
+                        type: 'none'
+                    },
+                    axisTick: {
+                        show: false
+                    }
+
+                }
+            ],
+            yAxis: [
+                {
+                    show: false,
+                    type: 'value',
+                    name: '订购数',
+                    min: barMin,
+                    max:barMax,
+                    interval: 50,
+                    axisLabel: {
+                        formatter: '{value} 个',
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                },
+                {
+                    show: false,
+                    type: 'value',
+                    name: '成员数',
+                    min: lineMin,
+                    max: lineMax,
+                    interval: 5,
+                    axisLabel: {
+                        formatter: '{value} 个',
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                }
+            ],
+
+            series: [
+                {
+
+                    name: '订购数',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#3398DB'
+                                }
+                            }
+                        },
+                    },
+                    barWidth: '40%',
+                    data: dataBar
+                },
+                {
+                    name: '成员数',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#f77003'
+                                }
+                            }
+                        },
+                    },
+                    data: dataLine
+                }
+            ]
+        };
+        var barAndLineChart = echarts.init(document.getElementById(charId));
+        barAndLineChart.setOption(optionBarAndLine);
+    }
+
+    var caiLingProvince = ['山东','甘肃','江苏','福建','浙江','四川','安徽','湖北','内蒙古','江西','重庆','广西' ];
+    var caiLingOrderData=[82,44,9,8,6,4,2,1,1,1,1,1];
+    var caiLingMemberData=[9359,18371,3357,9020,831,652,1221,18,3,105,6364,0];
+    console.log(caiLingProvince.length);
+    console.log(caiLingOrderData.length);
+    console.log(caiLingMemberData.length);
+    console.log("-------------");
+    caiLingBarAndLineChar('caiLingBarAndLine',caiLingProvince,caiLingOrderData,caiLingMemberData,0,100,0,25000);
+    function caiLingBarAndLineChar(charId,province,dataBar,dataLine,barMin,barMax,lineMin,lineMax){
+        var optionBarAndLine02 = {
+            backgroundColor: '#FFFFFF',
+            color: ['#3398DB', '#f77003'],
+            title: {
+                text: '视频彩铃数据统计',
+                left: '10px',
+                textStyle: {
+                    color: '#333',
+                    fontStyle: 'normal',
+                    fontWeight: 'normal',
+                    fontSize: 14
+                }
+            },
+            tooltip: {
+                trigger: 'axis',
+                // axisPointer: {
+                // 	type: 'cross',
+                // 	crossStyle: {
+                // 		color: '#999'
+                // 	}
+                // }
+            },
+            toolbox: {
+                feature: {
+                    dataView: {show: false, readOnly: false},
+                    magicType: {show: false, type: ['line', 'bar']},
+                    restore: {show: false},
+                    saveAsImage: {show: false}
+                }
+            },
+            grid: {
+                left: '4%',
+                right: '4%',
+                top: '5%',
+                bottom: '21%',
+            },
+            legend: {
+                data: ['订购数', '成员数'],
+                right: '20px',
+                top: '0%',
+            },
+            dataZoom: [
+                {
+                    show: true,
+                    realtime: true,
+                    start: 0,
+                    end: 40,
+                    // maxSpan: 20,
+                    zoomLock: true,  //  只能平移不能缩放
+                    textStyle: {
+                        lineHeight: 20,
+                        fontSize: 12
+                    },
+                    bottom: '0',
+                }, {
+                    type: 'inside',
+                    zoomOnMouseWheel:false,
+                    moveOnMouseMove:false,
+                    realtime: true,
+                    start: 0,
+                    end: 20,
+
+                }
+            ],
+            xAxis: [
+                {
+                    type: 'category',
+                    data: province,
+                    axisLabel:{
+                        show: true,
+                        interval:0,
+                        rotate:0,
+                        textStyle: {
+                            color: '#333'
+                        }
+                    },
+                    axisPointer: {
+                        type: 'none'
+                    },
+                    axisTick: {
+                        show: false
+                    }
+
+                }
+            ],
+            yAxis: [
+                {
+                    show: false,
+                    type: 'value',
+                    name: '订购数',
+                    min: barMin,
+                    max:barMax,
+                    interval: 50,
+                    axisLabel: {
+                        formatter: '{value} 个',
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                },
+                {
+                    show: false,
+                    type: 'value',
+                    name: '成员数',
+                    min: lineMin,
+                    max: lineMax,
+                    interval: 5,
+                    axisLabel: {
+                        formatter: '{value} 个',
+                        show: false
+                    },
+                    axisTick: {
+                        show: false
+                    },
+                }
+            ],
+
+            series: [
+                {
+
+                    name: '订购数',
+                    type: 'bar',
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#3398DB'
+                                }
+                            }
+                        },
+                    },
+                    barWidth: '40%',
+                    data: dataBar
+                },
+                {
+                    name: '成员数',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    itemStyle: {
+                        normal: {
+                            label: {
+                                show: true,
+                                position: 'top',
+                                textStyle: {
+                                    color: '#f77003'
+                                }
+                            }
+                        },
+                    },
+                    data: dataLine
+                }
+            ]
+        };
+        var barAndLineChart = echarts.init(document.getElementById(charId));
+        barAndLineChart.setOption(optionBarAndLine02);
+    }
+
+
+</script>
+<script>
+    function randomData() {
+        return Math.round(Math.random() * 500);
+    }
+
+    var mydata = [
+        {name: '北京', value: randomData()}, {name: '天津', value: randomData()},
+        {name: '上海', value: randomData()}, {name: '重庆', value: randomData()},
+        {name: '河北', value: randomData()}, {name: '河南', value: randomData()},
+        {name: '云南', value: randomData()}, {name: '辽宁', value: randomData()},
+        {name: '黑龙江', value: randomData()}, {name: '湖南', value: randomData()},
+        {name: '安徽', value: randomData()}, {name: '山东', value: randomData()},
+        {name: '新疆', value: randomData()}, {name: '江苏', value: randomData()},
+        {name: '浙江', value: randomData()}, {name: '江西', value: randomData()},
+        {name: '湖北', value: randomData()}, {name: '广西', value: randomData()},
+        {name: '甘肃', value: randomData()}, {name: '山西', value: randomData()},
+        {name: '内蒙古', value: randomData()}, {name: '陕西', value: randomData()},
+        {name: '吉林', value: randomData()}, {name: '福建', value: randomData()},
+        {name: '贵州', value: randomData()}, {name: '广东', value: randomData()},
+        {name: '青海', value: randomData()}, {name: '西藏', value: randomData()},
+        {name: '四川', value: randomData()}, {name: '宁夏', value: randomData()},
+        {name: '海南', value: randomData()}, {name: '台湾', value: randomData()},
+        {name: '香港', value: randomData()}, {name: '澳门', value: randomData()}
+    ];
+
+    var optionMap = {
+        backgroundColor: '#FFFFFF',
+        title: {
+            text: '全国地图大数据',
+            subtext: '',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+
+        //左侧小导航图标
+        visualMap: {
+            show: true,
+            x: 'left',
+            y: 'center',
+            splitList: [
+                {start: 500, end: 600}, {start: 400, end: 500},
+                {start: 300, end: 400}, {start: 200, end: 300},
+                {start: 100, end: 200}, {start: 0, end: 100},
+            ],
+            color: ['#5475f5', '#9feaa5', '#85daef', '#74e2ca', '#e6ac53', '#9fb5ea']
+        },
+
+        //配置属性
+        series: [{
+            name: '数据',
+            type: 'map',
+            mapType: 'china',
+            roam: true,
+            label: {
+                normal: {
+                    show: true  //省份名称
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+            data: mydata  //数据
+        }]
+    };
+    var chart = echarts.init(document.getElementById('china'));
+    chart.setOption(optionMap);
+
+
+    var optionBar = {
+        color: ['#3398DB'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: [
+            {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                axisTick: {
+                    alignWithLabel: true
+                }
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '直接访问',
+                type: 'bar',
+                barWidth: '60%',
+                data: [10, 52, 200, 334, 390, 330, 220]
+            }
+        ]
+    };
+    var barChart = echarts.init(document.getElementById('bar'));
+    barChart.setOption(optionBar);
+</script>
+
+
+
+<script>
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+        recalc();
+    })(document, window);
+</script>
+</html>
