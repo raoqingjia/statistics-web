@@ -75,27 +75,26 @@
 <div class="banner"></div>
 <div class="title-wrap clearflx">
     <h1>疫情专项数据统计分析</h1>
-    <p>1月28日0时至1月29日24时数据一览</p>
+    <p>1月29日0时至1月29日24时数据一览</p>
     <div class="title-content clearflx">
         <div class="clearflx">
             <dl>
                 <dt>云视讯数据统计</dt>
-                <dd>新增订购数<span>220个</span></dd>
-                <dd>新增成员数<span>19923个</span></dd>
-                <dd>支撑医院数<span>32个</span></dd>
-                <dd>支撑政府部门数<span>186个</span></dd>
+                <dd>新增订购数<span>337个</span></dd>
+                <dd>新增成员数<span>28751个</span></dd>
+                <dd>支撑医院数<span>36个</span></dd>
+                <dd>支撑政府部门数<span>299个</span></dd>
             </dl>
             <dl>
                 <dt>视频彩铃统计</dt>
-                <dd>新增订购数<span>160个</span></dd>
-                <dd>新增成员数<span>49300个</span></dd>
-                <dd>支撑医院数<span>15个</span></dd>
-                <dd>支撑政府部门数<span>145个</span></dd>
+                <dd>新增订购数<span>375个</span></dd>
+                <dd>新增成员数<span>87255个</span></dd>
+                <dd>支撑医院数<span>25个</span></dd>
+                <dd>支撑政府部门数<span>345个</span></dd>
             </dl>
         </div>
         <p class="phone">值班电话：158 1051 1759 、182 0165 0691</p>
     </div>
-
 </div>
 
 <div id="yunShiXunBarAndLine" style="width: 100%;height:30rem;"></div>
@@ -113,14 +112,16 @@
 <script src="js/lib/china.js"></script>
 <script src="js/lib/vintage.js"></script>
 <script>
-    var yunShiXunProvince = ['河南','四川','江苏','山东','宁夏','内蒙古','新疆','重庆','陕西','北京','山西','安徽','福建' ];
-    var yunShiXunOrderData=[131,48,12,9,5,4,3,2, 2,1,1,1,1];
-    var yunShiXunMemberData=[13550,4792,181,164,533,426,5,5,6,78,0,1,245];
+
+
+    var yunShiXunProvince = ['河南','四川','江苏','山东','安徽','甘肃','重庆','福建','河北','内蒙古','云南','山西','江西','湖北','广西','吉林'];
+    var yunShiXunOrderData=[202,77,15,14,6,5,3,3,3,3,1,1,1,1,1,1];
+    var yunShiXunMemberData=[16812,3599,2576,1192,204,327,4,0,0,787,12,2,47,209,2980,0];
     console.log(yunShiXunProvince.length);
     console.log(yunShiXunOrderData.length);
     console.log(yunShiXunMemberData.length);
     console.log("-------------");
-    yunShiXunBarAndLineChar('yunShiXunBarAndLine',yunShiXunProvince,yunShiXunOrderData,yunShiXunMemberData,0,200,0,20000);
+    yunShiXunBarAndLineChar('yunShiXunBarAndLine',yunShiXunProvince,yunShiXunOrderData,yunShiXunMemberData,0,250,0,21000);
     function yunShiXunBarAndLineChar(charId,province,dataBar,dataLine,barMin,barMax,lineMin,lineMax){
         var optionBarAndLine = {
             backgroundColor: '#FFFFFF',
@@ -282,14 +283,16 @@
         barAndLineChart.setOption(optionBarAndLine);
     }
 
-    var caiLingProvince = ['山东','甘肃','江苏','福建','浙江','四川','安徽','湖北','内蒙古','江西','重庆','广西' ];
-    var caiLingOrderData=[82,44,9,8,6,4,2,1,1,1,1,1];
-    var caiLingMemberData=[9359,18371,3357,9020,831,652,1221,18,3,105,6364,0];
+
+    var caiLingProvince = ['甘肃','山东','江西','江苏','安徽','福建','四川','贵州','内蒙古','广东','浙江','陕西','广西' ,'河北' ,'北京' ,'天津' ,'黑龙江' ,'湖南' ,'湖北' ];
+    var caiLingOrderData=[178,113,13,12,10,8,8,6,5,5,5,3,2,2,1,1,1,1,1];
+    var caiLingMemberData=[18750,11815,1258,3812,33151,451,1460,4896,4318,1281,5488,15,19,7,20,167,26,317,4];
+
     console.log(caiLingProvince.length);
     console.log(caiLingOrderData.length);
     console.log(caiLingMemberData.length);
     console.log("-------------");
-    caiLingBarAndLineChar('caiLingBarAndLine',caiLingProvince,caiLingOrderData,caiLingMemberData,0,100,0,25000);
+    caiLingBarAndLineChar('caiLingBarAndLine',caiLingProvince,caiLingOrderData,caiLingMemberData,0,250,0,40000);
     function caiLingBarAndLineChar(charId,province,dataBar,dataLine,barMin,barMax,lineMin,lineMax){
         var optionBarAndLine02 = {
             backgroundColor: '#FFFFFF',
