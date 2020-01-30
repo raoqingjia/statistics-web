@@ -38,13 +38,13 @@
         .title-content {
             width: 100%;
             box-sizing: border-box;
-            padding: 0 2rem 0;
+            padding: 0 1.5rem 0;
         }
 
         .title-content dl {
             float: left;
             width: 50%;
-            padding: 0 1rem;
+            padding: 0 0 0 1.5rem;
             box-sizing: border-box;
         }
 
@@ -67,14 +67,26 @@
             margin: 0.5rem 0;
             font-size: 14px;
         }
-
+         i.reset{
+             display: block;
+             float: right;
+             width: 20px;
+             height: 20px;
+             background-image: url("img/reset.jpg");
+             background-repeat: no-repeat;
+             background-size: cover;
+             position: absolute;
+             right: 1.3rem;
+             top: 0.2rem;
+             z-index: 99999;
+         }
 
     </style>
 </head>
 <body>
 <div class="banner"></div>
 <div class="title-wrap clearflx">
-    <h1>疫情专项数据统计分析</h1>
+    <h1>疫情防控政企重点业务专项数据统计分析</h1>
     <p>1月29日0时至1月29日24时数据一览</p>
     <div class="title-content clearflx">
         <div class="clearflx">
@@ -84,6 +96,9 @@
                 <dd>新增成员数<span>28751个</span></dd>
                 <dd>支撑医院数<span>36个</span></dd>
                 <dd>支撑政府部门数<span>299个</span></dd>
+                <dd>使用时长累计<span>349.8万分钟</span></dd>
+<!--                <dd>日订单成功率<span>0</span></dd>-->
+<!--                <dd>除正常校验报错外的订单成功率<span>0</span></dd>-->
             </dl>
             <dl>
                 <dt>视频彩铃统计</dt>
@@ -91,29 +106,148 @@
                 <dd>新增成员数<span>87255个</span></dd>
                 <dd>支撑医院数<span>25个</span></dd>
                 <dd>支撑政府部门数<span>345个</span></dd>
+                <dd>彩铃宣传累计<span>31.1万次</span></dd>
+<!--                <dd>日订单成功率<span>0</span></dd>-->
+<!--                <dd>除正常校验报错外的订单成功率<span>0</span></dd>-->
             </dl>
         </div>
-        <p class="phone">值班电话：158 1051 1759 、182 0165 0691</p>
+        <p class="phone">集客大厅值班电话<span style="display: block">158 1051 1759 、182 0165 0691</span></p>
     </div>
 </div>
-
-<div id="yunShiXunBarAndLine" style="width: 100%;height:30rem;"></div>
+<div style="position: relative;z-index: 1">
+    <i class="reset" id="yunShiXunReset"></i>
+    <div id="yunShiXunChina" style="width: 100%;height: 30rem;"></div>
+</div>
+<div style="margin: -3rem 0 0 0;">
+  <div id="yunShiXunBarAndLine" style="width: 100%;height:30rem;"></div>
+</div>
+<div style="position: relative;z-index: 1">
+    <i class="reset" id="caiLingReset"></i>
+    <div id="caiLingChina" style="width: 100%;height: 30rem;"></div>
+</div>
 <div style="margin: -2rem 0 0 0;">
     <div id="caiLingBarAndLine" style="width: 100%;height:30rem;"></div>
 </div>
-
-
-
-<div id="china" style="width: 100%;height: 350px;display: none;"></div>
 <div id="bar" style="width: 100%;height: 350px;display: none;"></div>
 </body>
 <script src="js/lib/jquery-3.2.1.min.js"></script>
+<!--<script src="js/lib/jQuery-Mobile1.4.5.js"></script>-->
 <script src="js/lib/echarts.min.js"></script>
 <script src="js/lib/china.js"></script>
 <script src="js/lib/vintage.js"></script>
 <script>
 
+    var yunShiXunMapData = [
+        {name: '北京', value: 0}, {name: '天津', value: 0},
+        {name: '上海', value: 0}, {name: '重庆', value: 7},
+        {name: '河北', value: 3}, {name: '河南', value: 17014},
+        {name: '云南', value: 13}, {name: '辽宁', value: 0},
+        {name: '黑龙江', value: 0}, {name: '湖南', value: 0},
+        {name: '安徽', value: 210}, {name: '山东', value: 1206},
+        {name: '新疆', value: 0}, {name: '江苏', value: 2591},
+        {name: '浙江', value: 0}, {name: '江西', value: 48},
+        {name: '湖北', value: 210}, {name: '广西', value: 2981},
+        {name: '甘肃', value: 332}, {name: '山西', value: 3},
+        {name: '内蒙古', value: 790}, {name: '陕西', value: 0},
+        {name: '吉林', value: 1}, {name: '福建', value: 3},
+        {name: '贵州', value: 0}, {name: '广东', value: 0},
+        {name: '青海', value: 0}, {name: '西藏', value: 0},
+        {name: '四川', value: 3676}, {name: '宁夏', value: 0},
+        {name: '海南', value: 0}, {name: '台湾', value: 0},
+        {name: '香港', value: 0}, {name: '澳门', value: 0},
+        {name: '南海诸岛', value: 0, itemStyle:{normal:{opacity:0,label:{show:false}}} }
+    ];
+    function yunShiXunMapChar(mapDate){
+        var optionMap = {
+            backgroundColor: '#FFFFFF',
+            title: {
+                text: '云视讯数据分布',
+                left: '10px',
+                textStyle: {
+                    color: '#333',
+                    fontStyle: 'normal',
+                    fontWeight: 'normal',
+                    fontSize: 14
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter:function(params){
+                    var htmlStr = '<div>'+ params.name +'<br/>'+'总量：'+ params.value +'<br/>';   //获取横坐标的值
+                    return htmlStr;
+                }
+            },
+            //左侧小导航图标
+            visualMap: {
+                show: false,
+                // x: 'left',
+                // y: 'top',
+                splitList: [
+                    {start: 15000, end: 25000},
+                    {start: 5000, end: 15000},
+                    {start: 1000, end: 5000},
+                    {start: 300, end: 1000},
+                    {start: 1, end: 300},
+                ],
+                // min: 0,
+                // max: 1000,
+                // left: '20px',
+                // top: 'bottom',
+                // text: ['高','低'],           // 文本，默认为数值文本
+                // calculable: true
 
+            },
+            //配置属性
+            series: [{
+                name: '总量',
+                type: 'map',
+                mapType: 'china',
+                showLegendSymbol: false,   // 隐藏指示点
+                roam: false,
+                zoom: 1.1,
+                label: {
+                    position: 'left',
+                    normal: {
+                        show: true, //省份名称
+                        textStyle: {
+                            fontSize: 10
+                        },
+                        formatter:function (num) {
+                            if(num.value>0){
+                                return num.name;
+                            }else {
+                                return '';
+                            }
+                        }
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                data: mapDate  //数据
+            }]
+        };
+        var charMap = echarts.init(document.getElementById('yunShiXunChina'), 'vintage');
+        charMap.on('click', function(params){
+            let index=null
+            yunShiXunProvince.forEach((name,i)=>{
+                if(name==params.name){
+                    index=i
+                }
+            });
+            if(index!=null){
+                console.log(index);
+                var barMax=setMaxData(yunShiXunOrderData[index]);
+                var lineMax=setMaxData(yunShiXunMemberData[index]);
+                console.log(barMax);
+                console.log(lineMax);
+                yunShiXunBarAndLineChar('yunShiXunBarAndLine', [params.name], [yunShiXunOrderData[index]], [yunShiXunMemberData[index]], 0,barMax, 0,lineMax );
+            }else{
+                yunShiXunBarAndLineChar('yunShiXunBarAndLine', [params.name], [], [], 0, 100, 0, 100);
+            }
+        });
+        charMap.setOption(optionMap);
+    }
     var yunShiXunProvince = ['河南','四川','江苏','山东','安徽','甘肃','重庆','福建','河北','内蒙古','云南','山西','江西','湖北','广西','吉林'];
     var yunShiXunOrderData=[202,77,15,14,6,5,3,3,3,3,1,1,1,1,1,1];
     var yunShiXunMemberData=[16812,3599,2576,1192,204,327,4,0,0,787,12,2,47,209,2980,0];
@@ -121,8 +255,7 @@
     console.log(yunShiXunOrderData.length);
     console.log(yunShiXunMemberData.length);
     console.log("-------------");
-    yunShiXunBarAndLineChar('yunShiXunBarAndLine',yunShiXunProvince,yunShiXunOrderData,yunShiXunMemberData,0,250,0,21000);
-    function yunShiXunBarAndLineChar(charId,province,dataBar,dataLine,barMin,barMax,lineMin,lineMax){
+    function yunShiXunBarAndLineChar(charId, province, dataBar, dataLine, barMin, barMax, lineMin, lineMax) {
         var optionBarAndLine = {
             backgroundColor: '#FFFFFF',
             color: ['#3398DB', '#f77003'],
@@ -179,8 +312,8 @@
                     bottom: '0',
                 }, {
                     type: 'inside',
-                    zoomOnMouseWheel:false,
-                    moveOnMouseMove:false,
+                    zoomOnMouseWheel: false,
+                    moveOnMouseMove: false,
                     realtime: true,
                     start: 0,
                     end: 20,
@@ -191,10 +324,10 @@
                 {
                     type: 'category',
                     data: province,
-                    axisLabel:{
+                    axisLabel: {
                         show: true,
-                        interval:0,
-                        rotate:0,
+                        interval: 0,
+                        rotate: 0,
                         textStyle: {
                             color: '#333'
                         }
@@ -214,7 +347,7 @@
                     type: 'value',
                     name: '订购数',
                     min: barMin,
-                    max:barMax,
+                    max: barMax,
                     interval: 50,
                     axisLabel: {
                         formatter: '{value} 个',
@@ -257,7 +390,7 @@
                             }
                         },
                     },
-                    barWidth: '40%',
+                    barWidth: '30px',
                     data: dataBar
                 },
                 {
@@ -283,17 +416,136 @@
         barAndLineChart.setOption(optionBarAndLine);
     }
 
+    yunShiXunInit();
+    function yunShiXunInit(){
+        yunShiXunBarAndLineChar('yunShiXunBarAndLine', yunShiXunProvince, yunShiXunOrderData, yunShiXunMemberData, 0, 300, 0, 30000);
+        yunShiXunMapChar(yunShiXunMapData);
+    }
+    $("#yunShiXunReset").on('click',function () {
+        yunShiXunInit();
+    });
+
+    // ====================================================================================================================================
+
+    var caiLingMapData = [
+        {name: '北京', value: 21}, {name: '天津', value: 168},
+        {name: '上海', value: 0}, {name: '重庆', value: 0},
+        {name: '河北', value: 9}, {name: '河南', value: 0},
+        {name: '云南', value: 0}, {name: '辽宁', value: 0},
+        {name: '黑龙江', value: 27}, {name: '湖南', value: 318},
+        {name: '安徽', value: 33161}, {name: '山东', value: 11928},
+        {name: '新疆', value: 0}, {name: '江苏', value: 3824},
+        {name: '浙江', value: 5493}, {name: '江西', value: 1271},
+        {name: '湖北', value: 5}, {name: '广西', value: 21},
+        {name: '甘肃', value: 18928}, {name: '山西', value: 0},
+        {name: '内蒙古', value: 4323}, {name: '陕西', value: 18},
+        {name: '吉林', value: 0}, {name: '福建', value: 459},
+        {name: '贵州', value: 4902}, {name: '广东', value: 1286},
+        {name: '青海', value: 0}, {name: '西藏', value: 0},
+        {name: '四川', value: 1468}, {name: '宁夏', value: 0},
+        {name: '海南', value: 0}, {name: '台湾', value: 0},
+        {name: '香港', value: 0}, {name: '澳门', value: 0},
+        {name: '南海诸岛', value: 0, itemStyle:{normal:{opacity:0,label:{show:false}}} }
+    ];
+    function caiLingMapChar(mapDate){
+        var optionMap = {
+            backgroundColor: '#FFFFFF',
+            title: {
+                text: '云视讯数据分布',
+                left: '10px',
+                textStyle: {
+                    color: '#333',
+                    fontStyle: 'normal',
+                    fontWeight: 'normal',
+                    fontSize: 14
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter:function(params){
+                     var htmlStr = '<div>'+ params.name +'<br/>'+'总量：'+ params.value +'<br/>';   //获取横坐标的值
+                    return htmlStr;
+                }
+            },
+            //左侧小导航图标
+            visualMap: {
+                show: false,
+                // x: 'left',
+                // y: 'top',
+                splitList: [
+                    {start: 15000, end: 25000},
+                    {start: 5000, end: 15000},
+                    {start: 1000, end: 5000},
+                    {start: 300, end: 1000},
+                    {start: 1, end: 300},
+                ],
+                // min: 0,
+                // max: 1000,
+                // left: '20px',
+                // top: 'bottom',
+                // text: ['高','低'],           // 文本，默认为数值文本
+                // calculable: true
+
+            },
+            //配置属性
+            series: [{
+                name: '总量',
+                type: 'map',
+                mapType: 'china',
+                showLegendSymbol: false,   // 隐藏指示点
+                roam: false,
+                zoom: 1.1,
+                label: {
+                    position: 'left',
+                    normal: {
+                        show: true, //省份名称
+                        textStyle: {
+                            fontSize: 10
+                        },
+                        formatter:function (num) {
+                            if(num.value>0){
+                                return num.name;
+                            }else {
+                                return '';
+                            }
+                        }
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                data: mapDate  //数据
+            }]
+        };
+        var charMap = echarts.init(document.getElementById('caiLingChina'), 'vintage');
+        charMap.on('click', function(params){
+            let index=null
+            caiLingProvince.forEach((name,i)=>{
+                if(name==params.name){
+                    index=i
+                }
+            });
+            if(index!=null){
+                var barMax=setMaxData(caiLingOrderData[index]);
+                var lineMax=setMaxData(caiLingMemberData[index]);
+                console.log(barMax);
+                console.log(lineMax);
+                caiLingBarAndLineChar('caiLingBarAndLine', [params.name], [caiLingOrderData[index]], [caiLingMemberData[index]], 0,barMax, 0,lineMax );
+            }else{
+                caiLingBarAndLineChar('caiLingBarAndLine', [params.name], [], [], 0, 100, 0, 100);
+            }
+        });
+        charMap.setOption(optionMap);
+    }
 
     var caiLingProvince = ['甘肃','山东','江西','江苏','安徽','福建','四川','贵州','内蒙古','广东','浙江','陕西','广西' ,'河北' ,'北京' ,'天津' ,'黑龙江' ,'湖南' ,'湖北' ];
     var caiLingOrderData=[178,113,13,12,10,8,8,6,5,5,5,3,2,2,1,1,1,1,1];
     var caiLingMemberData=[18750,11815,1258,3812,33151,451,1460,4896,4318,1281,5488,15,19,7,20,167,26,317,4];
-
     console.log(caiLingProvince.length);
     console.log(caiLingOrderData.length);
     console.log(caiLingMemberData.length);
     console.log("-------------");
-    caiLingBarAndLineChar('caiLingBarAndLine',caiLingProvince,caiLingOrderData,caiLingMemberData,0,250,0,40000);
-    function caiLingBarAndLineChar(charId,province,dataBar,dataLine,barMin,barMax,lineMin,lineMax){
+    function caiLingBarAndLineChar(charId, province, dataBar, dataLine, barMin, barMax, lineMin, lineMax) {
         var optionBarAndLine02 = {
             backgroundColor: '#FFFFFF',
             color: ['#3398DB', '#f77003'],
@@ -350,8 +602,8 @@
                     bottom: '0',
                 }, {
                     type: 'inside',
-                    zoomOnMouseWheel:false,
-                    moveOnMouseMove:false,
+                    zoomOnMouseWheel: false,
+                    moveOnMouseMove: false,
                     realtime: true,
                     start: 0,
                     end: 20,
@@ -362,10 +614,10 @@
                 {
                     type: 'category',
                     data: province,
-                    axisLabel:{
+                    axisLabel: {
                         show: true,
-                        interval:0,
-                        rotate:0,
+                        interval: 0,
+                        rotate: 0,
                         textStyle: {
                             color: '#333'
                         }
@@ -385,7 +637,7 @@
                     type: 'value',
                     name: '订购数',
                     min: barMin,
-                    max:barMax,
+                    max: barMax,
                     interval: 50,
                     axisLabel: {
                         formatter: '{value} 个',
@@ -428,7 +680,7 @@
                             }
                         },
                     },
-                    barWidth: '40%',
+                     barWidth: '30px',
                     data: dataBar
                 },
                 {
@@ -454,78 +706,89 @@
         barAndLineChart.setOption(optionBarAndLine02);
     }
 
+    caiLingInit();
+    function caiLingInit(){
+        caiLingBarAndLineChar('caiLingBarAndLine', caiLingProvince, caiLingOrderData, caiLingMemberData, 0, 300, 0, 45000);
+        caiLingMapChar(caiLingMapData);
+    }
+    $("#caiLingReset").on('click',function () {
+        caiLingInit();
+    });
 
-</script>
-<script>
-    function randomData() {
-        return Math.round(Math.random() * 500);
+    // ====================================================================================================================================
+
+
+   function setMaxData(data){
+       console.log(data);
+       var flag=0;
+       if(data<=3){
+           flag=5;
+       } else if(data<=5){
+           flag=8;
+       } else  if(data<=10){
+           flag=12;
+       } else if(data<=20){
+           flag=30;
+       } else  if(data<=30){
+           flag=50;
+       } else if(data<=50){
+            flag=100;
+       } else if(data<=100){
+            flag=150;
+       }else if(data<=300){
+           flag=500;
+       }else if(data<=500){
+            flag=700;
+        }else if(data<=1000){
+            flag=1500;
+        }else if(data<=1500){
+            flag=1800;
+        }else if(data<=2000){
+            flag=2500;
+        }else if(data<=5000){
+           flag=6000;
+       }else if(data<=7000){
+           flag=9000;
+       } else if(data<=10000){
+           flag=12000;
+       }else if(data<=12000){
+           flag=15000;
+       }else if(data<=15000){
+           flag=18000;
+       }else if(data<=18000){
+           flag=22000;
+       }else if(data<=22000){
+           flag=25000;
+       }else if(data<=25000){
+            flag=27000;
+        }else if(data<=30000){
+            flag=35000;
+        }else if(data<=35000){
+            flag=40000;
+        }
+         return  flag;
     }
 
-    var mydata = [
-        {name: '北京', value: randomData()}, {name: '天津', value: randomData()},
-        {name: '上海', value: randomData()}, {name: '重庆', value: randomData()},
-        {name: '河北', value: randomData()}, {name: '河南', value: randomData()},
-        {name: '云南', value: randomData()}, {name: '辽宁', value: randomData()},
-        {name: '黑龙江', value: randomData()}, {name: '湖南', value: randomData()},
-        {name: '安徽', value: randomData()}, {name: '山东', value: randomData()},
-        {name: '新疆', value: randomData()}, {name: '江苏', value: randomData()},
-        {name: '浙江', value: randomData()}, {name: '江西', value: randomData()},
-        {name: '湖北', value: randomData()}, {name: '广西', value: randomData()},
-        {name: '甘肃', value: randomData()}, {name: '山西', value: randomData()},
-        {name: '内蒙古', value: randomData()}, {name: '陕西', value: randomData()},
-        {name: '吉林', value: randomData()}, {name: '福建', value: randomData()},
-        {name: '贵州', value: randomData()}, {name: '广东', value: randomData()},
-        {name: '青海', value: randomData()}, {name: '西藏', value: randomData()},
-        {name: '四川', value: randomData()}, {name: '宁夏', value: randomData()},
-        {name: '海南', value: randomData()}, {name: '台湾', value: randomData()},
-        {name: '香港', value: randomData()}, {name: '澳门', value: randomData()}
-    ];
-
-    var optionMap = {
-        backgroundColor: '#FFFFFF',
-        title: {
-            text: '全国地图大数据',
-            subtext: '',
-            x: 'center'
-        },
-        tooltip: {
-            trigger: 'item'
-        },
-
-        //左侧小导航图标
-        visualMap: {
-            show: true,
-            x: 'left',
-            y: 'center',
-            splitList: [
-                {start: 500, end: 600}, {start: 400, end: 500},
-                {start: 300, end: 400}, {start: 200, end: 300},
-                {start: 100, end: 200}, {start: 0, end: 100},
-            ],
-            color: ['#5475f5', '#9feaa5', '#85daef', '#74e2ca', '#e6ac53', '#9fb5ea']
-        },
-
-        //配置属性
-        series: [{
-            name: '数据',
-            type: 'map',
-            mapType: 'china',
-            roam: true,
-            label: {
-                normal: {
-                    show: true  //省份名称
-                },
-                emphasis: {
-                    show: false
-                }
-            },
-            data: mydata  //数据
-        }]
-    };
-    var chart = echarts.init(document.getElementById('china'));
-    chart.setOption(optionMap);
+</script>
 
 
+<script>
+    (function (doc, win) {
+        var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
+            };
+
+        if (!doc.addEventListener) return;
+        win.addEventListener(resizeEvt, recalc, false);
+        doc.addEventListener('DOMContentLoaded', recalc, false);
+        recalc();
+    })(document, window);
+</script>
+<script>
     var optionBar = {
         color: ['#3398DB'],
         tooltip: {
@@ -567,22 +830,4 @@
     barChart.setOption(optionBar);
 </script>
 
-
-
-<script>
-    (function (doc, win) {
-        var docEl = doc.documentElement,
-            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-            recalc = function () {
-                var clientWidth = docEl.clientWidth;
-                if (!clientWidth) return;
-                docEl.style.fontSize = 10 * (clientWidth / 320) + 'px';
-            };
-
-        if (!doc.addEventListener) return;
-        win.addEventListener(resizeEvt, recalc, false);
-        doc.addEventListener('DOMContentLoaded', recalc, false);
-        recalc();
-    })(document, window);
-</script>
 </html>
