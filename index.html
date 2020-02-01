@@ -138,23 +138,23 @@
         <div class="clearflx">
             <dl>
                 <dt>云视讯数据统计</dt>
-                <dd>新增订购数<span>446个</span></dd>
-                <dd>新增成员数<span>28662个</span></dd>
-                <dd>支撑医院数<span>42个</span></dd>
-                <dd>支撑政府部门数<span>396个</span></dd>
+                <dd>新增订购数<span>560个</span></dd>
+                <dd>新增成员数<span>49490个</span></dd>
+                <dd>支撑医院数<span>36个</span></dd>
+                <dd>支撑政府部门数<span>518个</span></dd>
                 <dd>使用时长累计<span>349.8万分钟</span></dd>
-                <dd class="scroll-bottom">日订单成功率<span>59.78%</span></dd>
-                <dd>除正常校验报错外的订单成功率<span>93.98%</span></dd>
+                <dd class="scroll-bottom">日订单成功率<span>92.07%</span></dd>
+                <dd>除正常校验报错外的订单成功率<span>87.99%</span></dd>
             </dl>
             <dl>
                 <dt>视频彩铃统计</dt>
-                <dd>新增订购数<span>570个</span></dd>
-                <dd>新增成员数<span>193163个</span></dd>
-                <dd>支撑医院数<span>32个</span></dd>
-                <dd>支撑政府部门数<span>534个</span></dd>
+                <dd>新增订购数<span>852个</span></dd>
+                <dd>新增成员数<span>123045个</span></dd>
+                <dd>支撑医院数<span>45个</span></dd>
+                <dd>支撑政府部门数<span>803个</span></dd>
                 <dd>彩铃宣传累计<span>31.1万次</span></dd>
-                <dd  class="scroll-bottom">日订单成功率<span>66.48%</span></dd>
-                <dd>除正常校验报错外的订单成功率<span>94.20%</span></dd>
+                <dd  class="scroll-bottom">日订单成功率<span>77.16%</span></dd>
+                <dd>除正常校验报错外的订单成功率<span>93.61%</span></dd>
             </dl>
         </div>
         <p class="phone">集客大厅值班电话<span style="display: block">158 1051 1759 、182 0165 0691</span></p>
@@ -237,21 +237,21 @@
 <script>
 
     var yunShiXunMapData = [
-        {name: '北京', value: 1}, {name: '天津', value: 0},
-        {name: '上海', value: 0}, {name: '重庆', value: 0},
-        {name: '河北', value: 501}, {name: '河南', value: 16140},
-        {name: '云南', value: 0}, {name: '辽宁', value: 0},
-        {name: '黑龙江', value: 0}, {name: '湖南', value: 0},
-        {name: '安徽', value: 0}, {name: '山东', value: 922},
-        {name: '新疆', value: 82}, {name: '江苏', value: 779},
+        {name: '北京', value: 290}, {name: '天津', value: 0},
+        {name: '上海', value: 0}, {name: '重庆', value: 113},
+        {name: '河北', value: 210}, {name: '河南', value: 28852},
+        {name: '云南', value: 0}, {name: '辽宁', value: 6},
+        {name: '黑龙江', value: 1}, {name: '湖南', value: 0},
+        {name: '安徽', value: 82}, {name: '山东', value: 1950},
+        {name: '新疆', value: 11}, {name: '江苏', value: 2623},
         {name: '浙江', value: 0}, {name: '江西', value: 0},
-        {name: '湖北', value: 0}, {name: '广西', value: 0},
-        {name: '甘肃', value: 1800}, {name: '山西', value: 1244},
-        {name: '内蒙古', value: 222}, {name: '陕西', value: 47},
-        {name: '吉林', value: 0}, {name: '福建', value: 2113},
-        {name: '贵州', value: 216}, {name: '广东', value: 0},
-        {name: '青海', value: 0}, {name: '西藏', value: 0},
-        {name: '四川', value: 4952}, {name: '宁夏', value: 89},
+        {name: '湖北', value: 0}, {name: '广西', value: 1},
+        {name: '甘肃', value: 6888}, {name: '山西', value: 7},
+        {name: '内蒙古', value: 2737}, {name: '陕西', value: 202},
+        {name: '吉林', value: 41}, {name: '福建', value: 259},
+        {name: '贵州', value: 73}, {name: '广东', value: 0},
+        {name: '青海', value: 71}, {name: '西藏', value: 0},
+        {name: '四川', value: 5386}, {name: '宁夏', value: 247},
         {name: '海南', value: 0}, {name: '台湾', value: 0},
         {name: '香港', value: 0}, {name: '澳门', value: 0},
         {name: '南海诸岛', value: 0, itemStyle:{normal:{opacity:0,label:{show:false}}} }
@@ -282,10 +282,10 @@
                 // x: 'left',
                 // y: 'top',
                 splitList: [
-                    {start: 15000, end: 25000},
-                    {start: 5000, end: 15000},
-                    {start: 1000, end: 5000},
-                    {start: 300, end: 1000},
+                    {start: 20000, end: 30000},
+                    {start: 12000, end: 20000},
+                    {start: 3000, end: 12000},
+                    {start: 300, end: 3000},
                     {start: 1, end: 300},
                 ],
                 // min: 0,
@@ -347,9 +347,10 @@
         });
         charMap.setOption(optionMap);
     }
-    var yunShiXunProvince = ['河南','四川','福建','甘肃','江苏','山西','山东','陕西','内蒙古','河北','贵州','宁夏','北京','新疆'];
-    var yunShiXunOrderData=[255,84,35,17,16,14,8,5,4,3,2,1,1,1];
-    var yunShiXunMemberData=[15885,4868,2078,1783,763,1230,914,42,218,498,214,88,0,81];
+    var yunShiXunProvince = ['河南','甘肃','四川','福建','江苏','山东','内蒙古','山西','陕西','辽宁','宁夏','吉林','河北','重庆','安徽','北京','黑龙江','贵州','广西','新疆','青海'];
+    var yunShiXunOrderData=[256,84,72,50,41,17,13,4,3,3,2,2,2,2,2,2,1,1,1,1,1];
+    var yunShiXunMemberData=[28596,6804,5314,209,2582,1933,2724,3,199,3,245,39,208,111,80,288,0,72,0,10,70];
+
 
     console.log(yunShiXunProvince.length);
     console.log(yunShiXunOrderData.length);
@@ -518,7 +519,7 @@
 
     yunShiXunInit();
     function yunShiXunInit(){
-        yunShiXunBarAndLineChar('yunShiXunBarAndLine', yunShiXunProvince, yunShiXunOrderData, yunShiXunMemberData, 0, 300, 0, 30000);
+        yunShiXunBarAndLineChar('yunShiXunBarAndLine', yunShiXunProvince, yunShiXunOrderData, yunShiXunMemberData, 0, 330, 0, 38000);
         yunShiXunMapChar(yunShiXunMapData);
     }
     $("#yunShiXunReset").on('click',function () {
@@ -528,21 +529,21 @@
     // ====================================================================================================================================
 
     var caiLingMapData = [
-        {name: '北京', value: 230}, {name: '天津', value: 0},
-        {name: '上海', value: 1}, {name: '重庆', value: 1},
-        {name: '河北', value: 187}, {name: '河南', value: 0},
-        {name: '云南', value: 0}, {name: '辽宁', value: 408},
-        {name: '黑龙江', value: 21}, {name: '湖南', value: 379},
-        {name: '安徽', value: 2984}, {name: '山东', value: 14031},
-        {name: '新疆', value: 0}, {name: '江苏', value: 8240},
-        {name: '浙江', value: 29536}, {name: '江西', value: 26045},
-        {name: '湖北', value: 0}, {name: '广西', value: 38},
-        {name: '甘肃', value: 19006}, {name: '山西', value: 0},
-        {name: '内蒙古', value: 506}, {name: '陕西', value: 0},
-        {name: '吉林', value: 0}, {name: '福建', value: 3733},
-        {name: '贵州', value: 67680}, {name: '广东', value: 14511},
+        {name: '北京', value: 919}, {name: '天津', value: 189},
+        {name: '上海', value: 1521}, {name: '重庆', value: 401},
+        {name: '河北', value: 983}, {name: '河南', value: 0},
+        {name: '云南', value: 0}, {name: '辽宁', value: 204},
+        {name: '黑龙江', value: 77}, {name: '湖南', value: 3340},
+        {name: '安徽', value: 1}, {name: '山东', value: 22473},
+        {name: '新疆', value: 0}, {name: '江苏', value: 4788},
+        {name: '浙江', value: 22376}, {name: '江西', value: 490},
+        {name: '湖北', value: 169}, {name: '广西', value: 81},
+        {name: '甘肃', value: 17963}, {name: '山西', value: 0},
+        {name: '内蒙古', value: 475}, {name: '陕西', value: 1},
+        {name: '吉林', value: 0}, {name: '福建', value: 1364},
+        {name: '贵州', value: 23457}, {name: '广东', value: 9940},
         {name: '青海', value: 0}, {name: '西藏', value: 0},
-        {name: '四川', value: 6394}, {name: '宁夏', value: 0},
+        {name: '四川', value: 12944}, {name: '宁夏', value: 0},
         {name: '海南', value: 0}, {name: '台湾', value: 0},
         {name: '香港', value: 0}, {name: '澳门', value: 0},
         {name: '南海诸岛', value: 0, itemStyle:{normal:{opacity:0,label:{show:false}}} }
@@ -573,11 +574,11 @@
                 // x: 'left',
                 // y: 'top',
                 splitList: [
-                    {start: 40000, end: 75000},
-                    {start: 2000, end: 40000},
-                    {start: 5000, end: 2000},
-                    {start: 300, end: 5000},
-                    {start: 1, end: 300},
+                    {start: 20000, end: 30000},
+                    {start: 10000, end: 20000},
+                    {start: 5000, end: 10000},
+                    {start: 1000, end: 5000},
+                    {start: 1, end: 1000},
                 ],
                 // min: 0,
                 // max: 1000,
@@ -638,12 +639,10 @@
         charMap.setOption(optionMap);
     }
 
-    var caiLingProvince = ['甘肃','山东','江苏','四川','贵州','安徽','浙江','广东','福建',
-        '内蒙古','河北','广西','江西','黑龙江','湖南','重庆','北京','上海','辽宁' ];
+    var caiLingProvince = ['甘肃','山东','江苏','四川','贵州','浙江','河北','广东','福建','湖北','湖南','内蒙古','北京','重庆','广西','江西','黑龙江','上海','天津','辽宁','安徽','陕西' ];
 
-
-    var caiLingOrderData=[266,116,36,32,28,20,19,17,10,6,5,4,4,2,1,1,1,1,1];
-    var caiLingMemberData=[18740,13915,8204,6362,67652,2964,29517,14494,3723,500,182,34,26041,19,378,0,229,0,407];
+    var caiLingOrderData=[461,146,51,44,24,22,19,18,16,10,6,6,5,5,4,3,3,3,2,2,1,1];
+    var caiLingMemberData=[17502,22327,4737,12900,23433,22354,964,9922,1348,159,3334,469,914,396,77,487,74,1518,187,202,0,0];
 
     console.log(caiLingProvince.length);
     console.log(caiLingOrderData.length);
@@ -812,7 +811,7 @@
 
     caiLingInit();
     function caiLingInit(){
-        caiLingBarAndLineChar('caiLingBarAndLine', caiLingProvince, caiLingOrderData, caiLingMemberData, 0, 300, 0, 80000);
+        caiLingBarAndLineChar('caiLingBarAndLine', caiLingProvince, caiLingOrderData, caiLingMemberData, 0, 700, 0, 31000);
         caiLingMapChar(caiLingMapData);
     }
     $("#caiLingReset").on('click',function () {
@@ -829,7 +828,9 @@
    function setMaxData(data){
        console.log(data);
        var flag=0;
-       if(data<=3){
+       if(data<=2){
+           flag=3;
+       }else if(data<=3){
            flag=5;
        } else if(data<=5){
            flag=8;
